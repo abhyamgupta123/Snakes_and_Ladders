@@ -12,7 +12,7 @@ This repo contains the basic Desktop GUI game application simulating Ancient Sna
 
 - Now change the working directory to cloned repo:-
   ```
-  $ cd Snakes_and_Ladders
+  $ cd ./Snakes_and_Ladders
   ```
   
 - Now make sure to create python's `Virtual Enviornment` to keep seperate the modules for this application from global configurations. Do so by executing command
@@ -36,6 +36,6 @@ This repo contains the basic Desktop GUI game application simulating Ancient Sna
   ```
 
 
-### Please mark star if you enjoy this game.
+### Please star this repo if you enjoy this game.
 
 Thank you.
