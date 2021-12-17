@@ -1,4 +1,7 @@
 venv/*
-/venv
-./venv/*
-.qt_for_python/*
+/venv/*
+./venv/**
+.qt_for_python/**
+qt_for_python
+*.qt_for_python/*
+*venv/*
