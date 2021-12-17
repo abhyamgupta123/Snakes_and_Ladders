@@ -1,5 +1,5 @@
-# Snakes_and_Ladders
-This repo contains the basic Desktop GUI game application simulating Ancient Snakes and Ladders game. Hope you enjoy this game
+# Snakes and Ladders
+This repo contains the basic Desktop GUI game application simulating Ancient Snakes and Ladders game. Hope you will enjoy this game.
 
 
 # Steps for Installation 
