@@ -61,7 +61,8 @@ class UI_handler(GUI.Ui_window, QtWidgets.QMainWindow, QtWidgets.QDialog):
 
     def startGame(self):
         """
-        
+        This function initialises all the necessary settings and variables and 
+        flags as per requirements when the game actually starts.
         """
         
         # Moving the players position to origin.
@@ -115,7 +116,6 @@ class UI_handler(GUI.Ui_window, QtWidgets.QMainWindow, QtWidgets.QDialog):
 
         # Simulating rolling dice event.
         random_number = self.generate_number()
-        # random_number = 9
         
         # Handling error if self.p1_turn is not initialised yet.
         try:
@@ -244,11 +244,24 @@ class UI_handler(GUI.Ui_window, QtWidgets.QMainWindow, QtWidgets.QDialog):
 
     
     def reset_position(self) -> None:
+        """
+        This function resets the player's goti position to their starting place. 
+        """
         self.player2.move(10, 750)
         self.player1.move(10, 800)
 
 
     def _get_players_initial_coordinates(self, first: bool = True) -> Tuple[int]:
+        """
+        This function gives the player's initial co-ordinates when the window just opens.
+        @params:
+            first: flag to identify wheather the request for co-ordinates is for player1
+                    or player2
+
+        @return: tuple of two integer points representing x & y co-ordinates of players
+                    respectively. 
+        """
+
         if first:
             return (self.player1.x(), self.player1.y())
         else:
@@ -279,6 +292,15 @@ class UI_handler(GUI.Ui_window, QtWidgets.QMainWindow, QtWidgets.QDialog):
 
 
     def toggle_active_player_color(self, player1: bool) -> None:
+        """
+        This function changes the css of player1 or player2 indicators, thereby 
+        informing us about which player's turn is currently going on. 
+
+        @params:
+            player1: flag to identify player1 or player2 for which the notification
+                        of alertess will be generated.
+        """
+        
         if player1:
             self.change_player1_color_solid()
             self.change_player2_color_fade()
@@ -288,6 +310,11 @@ class UI_handler(GUI.Ui_window, QtWidgets.QMainWindow, QtWidgets.QDialog):
 
 
     def toggle_players_chance(self) -> None:
+        """
+        Toggles the player's chance variable indicating which player's turn is
+        currently going to be. This is helper function to support the exsisting 
+        algorithm to work properly.
+        """
         if self.p1_turn:
             self.p1_turn: bool = False
             return
@@ -403,6 +430,19 @@ class UI_handler(GUI.Ui_window, QtWidgets.QMainWindow, QtWidgets.QDialog):
 
 
     def checkpoints_map(self, pos: int) -> Union[int, None]:
+        """
+        Contains all the key-value pairs of checkpoints that we have in game.
+        Checkpoints includes the snake-biting positions to go down and ladder 
+        rising positions to rise up.
+
+        @params: 
+            pos: required for getting final co-ordinates/place of the players 
+                    when the particular checkpoint position is reached.
+
+        @returns: final corresponding position in 1-100 grid game board when 
+                    some checkpoint is reached.
+        """
+        
         checkpoints: Dict[int, int] = {
             9: 53,
             23: 59,
@@ -416,6 +456,18 @@ class UI_handler(GUI.Ui_window, QtWidgets.QMainWindow, QtWidgets.QDialog):
 
 
     def _get_position_object(self, index: str) -> Union[QtWidgets.QFrame, None]:
+        """
+        This functino gives the corresponding QWidget objects that are mapped to each 
+        position from 1-100 in GUI. This objects helps to identify the position of particular 
+        position between 0-100 thereby making us easy for moving the player's goti within the game.
+
+        @params:
+            index: this is the position of any player's goti
+
+        @returns: corresponding QFrame object that is present at that particular geometrical
+                    location, or None in case the position doesn't exsists i.e. if position > 100.
+        """
+        
         positions: Dict[str, QtWidgets.QFrament] = {
             "1": self.f1, "2": self.f2, "3": self.f3, "4": self.f4, "5": self.f5,
             "6": self.f6, "7": self.f7, "8": self.f8, "9": self.f9, "10": self.f10,
@@ -443,11 +495,22 @@ class UI_handler(GUI.Ui_window, QtWidgets.QMainWindow, QtWidgets.QDialog):
 
 
 if __name__ == "__main__":
+    # Initialising our GUI app
     app = QtWidgets.QApplication(sys.argv)
     MainWindow = QtWidgets.QMainWindow()
+
+    # Instantialting the UI class
     ui = UI_handler()
+
+    # Handling the app to show the main desined UI from UI_handler class
     ui.setupUi(MainWindow)
+
+    # Displaying the game window. 
     MainWindow.show()
+
+    # For setting up the basic configuratino required for playing this game.
     ui.initialise_buttons()
     ui.initialise_game()
+
+    # Silently Exits when window closed.
     sys.exit(app.exec_())
