@@ -134,6 +134,7 @@ class UI_handler(GUI.Ui_window, QtWidgets.QMainWindow, QtWidgets.QDialog):
                         self.p1_position: int = 1
                         posiiton_obj = self._get_position_object(str(self.p1_position))
                         self.move_player1(posiiton_obj.x(), posiiton_obj.y())
+                        print(f"=> Player 1 pos - {self.p1_position} | player 2 pos - {self.p2_position}")
 
                     else:
                         time.sleep(0.7)
@@ -156,6 +157,8 @@ class UI_handler(GUI.Ui_window, QtWidgets.QMainWindow, QtWidgets.QDialog):
                         self.p2_position: int = 1
                         posiiton_obj = self._get_position_object(str(self.p2_position))
                         self.move_player2(posiiton_obj.x(), posiiton_obj.y())
+                        print(f"=> Player 1 pos - {self.p1_position} | player 2 pos - {self.p2_position}")
+
 
                     else:
                         time.sleep(0.7)
@@ -172,6 +175,7 @@ class UI_handler(GUI.Ui_window, QtWidgets.QMainWindow, QtWidgets.QDialog):
                 elif temp_pos == 100:
                     posiiton_obj = self._get_position_object("100")
                     self.move_player2(posiiton_obj.x(), posiiton_obj.y())
+                    print(f"=> Player 1 pos - {self.p1_position} | player 2 pos - {self.p2_position}")
                     self.show_notification("Snakes and Ladders", "Congratulations, Player 1 Wins")
                     self.new_game: bool = False
 
@@ -180,21 +184,26 @@ class UI_handler(GUI.Ui_window, QtWidgets.QMainWindow, QtWidgets.QDialog):
                     # print("positions are", self.p1_unlocked, self.p2_position)
                     posiiton_obj = self._get_position_object(str(self.p1_position))
                     self.move_player1(posiiton_obj.x(), posiiton_obj.y())
+                    print(f"=> Player 1 pos - {self.p1_position} | player 2 pos - {self.p2_position}")
+
 
                     # Checking if posiiton is checkpoint or not.
                     _checkpoint = self.checkpoints_map(int(self.p1_position))
                     if _checkpoint is not None:
+                        temp_p1_position = self.p1_position
                         self.p1_position: int = _checkpoint
                         posiiton_obj = self._get_position_object(str(_checkpoint))
-                        time.sleep(2)
+                        time.sleep(1)
                         self.move_player1(posiiton_obj.x(), posiiton_obj.y())
+                        print(f"=> Player 1 pos - {self.p1_position} | player 2 pos - {self.p2_position}")
+
                         
                         # Checking if the checkpoint reached is ladde or snake
                         '''
                         If checkpoint will be ladder then user gets another chance to play.
                         If checkpoint will be snake then user will not get another chance to play.
                         '''
-                        if _checkpoint > self.p1_position:
+                        if _checkpoint > temp_p1_position:
                             return
 
             else:
@@ -205,6 +214,7 @@ class UI_handler(GUI.Ui_window, QtWidgets.QMainWindow, QtWidgets.QDialog):
                 elif temp_pos == 100:
                     posiiton_obj = self._get_position_object("100")
                     self.move_player2(posiiton_obj.x(), posiiton_obj.y())
+                    print(f"=> Player 1 pos - {self.p1_position} | player 2 pos - {self.p2_position}")
                     self.show_notification("Snakes and Ladders", "Congratulations, Player 2 Wins")
                     self.new_game: bool = False
 
@@ -214,21 +224,25 @@ class UI_handler(GUI.Ui_window, QtWidgets.QMainWindow, QtWidgets.QDialog):
                     # print("positions are", self.p1_unlocked, self.p2_position)
                     posiiton_obj = self._get_position_object(str(self.p2_position))
                     self.move_player2(posiiton_obj.x(), posiiton_obj.y())
+                    print(f"=> Player 1 pos - {self.p1_position} | player 2 pos - {self.p2_position}")
+
 
                     # Checking if posiiton is checkpoint or not.
                     _checkpoint = self.checkpoints_map(int(self.p2_position))
                     if _checkpoint is not None:
+                        temp_p2_position = self.p2_position
                         self.p2_position: int = _checkpoint
                         posiiton_obj = self._get_position_object(str(_checkpoint))
-                        time.sleep(2)
+                        time.sleep(1)
                         self.move_player2(posiiton_obj.x(), posiiton_obj.y())
+                        print(f"=> Player 1 pos - {self.p1_position} | player 2 pos - {self.p2_position}")
                         
                         # Checking if the checkpoint reached is ladde or snake
                         '''
                         If checkpoint will be ladder then user gets another chance to play.
                         If checkpoint will be snake then user will not get another chance to play.
                         '''
-                        if _checkpoint > self.p1_position:
+                        if _checkpoint > temp_p2_position:
                             return
 
 
